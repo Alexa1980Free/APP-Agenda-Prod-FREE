@@ -4,28 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seguimiento de KPIs</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
+        /* Estilos aquí */
     </style>
 </head>
 <body>
 
 <h1>Seguimiento de KPIs Semanal</h1>
+<!-- Formulario de autenticación -->
+<button onclick="login()">Iniciar Sesión</button>
+<button onclick="logout()">Cerrar Sesión</button>
+
 <table id="kpiTable">
     <tr>
         <th>Semana</th>
@@ -41,41 +33,57 @@
 <h2>Agregar Datos</h2>
 <input type="number" id="semana" placeholder="Semana">
 <input type="number" id="caraACara" placeholder="Cara a Cara">
-<input type="number" id="preListings" placeholder="Pre-listings">
-<input type="number" id="preBuyings" placeholder="Pre-buyings">
-<input type="number" id="reservas" placeholder="Reservas">
-<input type="number" id="referidos" placeholder="Referidos">
-<input type="number" id="cierres" placeholder="Cierres">
+<!-- Otros campos -->
 <button onclick="agregarDatos()">Agregar</button>
 
 <script>
+    // Configuración de Firebase
+    const firebaseConfig = {
+        // Tu configuración aquí
+    };
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const database = firebase.database();
+
+    // Iniciar sesión
+    function login() {
+        const email = prompt("Ingrese su correo:");
+        const password = prompt("Ingrese su contraseña:");
+        auth.signInWithEmailAndPassword(email, password)
+            .then(user => {
+                console.log("Usuario autenticado:", user);
+                cargarDatos();
+            })
+            .catch(error => {
+                console.error("Error de autenticación:", error);
+            });
+    }
+
+    // Cerrar sesión
+    function logout() {
+        auth.signOut();
+    }
+
+    // Agregar datos
     function agregarDatos() {
+        const userId = auth.currentUser.uid;
         const semana = document.getElementById('semana').value;
         const caraACara = document.getElementById('caraACara').value;
-        const preListings = document.getElementById('preListings').value;
-        const preBuyings = document.getElementById('preBuyings').value;
-        const reservas = document.getElementById('reservas').value;
-        const referidos = document.getElementById('referidos').value;
-        const cierres = document.getElementById('cierres').value;
 
-        const table = document.getElementById('kpiTable');
-        const newRow = table.insertRow();
-        newRow.innerHTML = `<td>${semana}</td>
-                            <td>${caraACara}</td>
-                            <td>${preListings}</td>
-                            <td>${preBuyings}</td>
-                            <td>${reservas}</td>
-                            <td>${referidos}</td>
-                            <td>${cierres}</td>`;
-        
-        // Limpiar campos
-        document.getElementById('semana').value = '';
-        document.getElementById('caraACara').value = '';
-        document.getElementById('preListings').value = '';
-        document.getElementById('preBuyings').value = '';
-        document.getElementById('reservas').value = '';
-        document.getElementById('referidos').value = '';
-        document.getElementById('cierres').value = '';
+        database.ref(`users/${userId}/kpis/`).push({
+            semana: semana,
+            caraACara: caraACara,
+            // Otros campos...
+        });
+    }
+
+    // Cargar datos
+    function cargarDatos() {
+        const userId = auth.currentUser.uid;
+        database.ref(`users/${userId}/kpis/`).on('value', (snapshot) => {
+            const data = snapshot.val();
+            // Actualizar la tabla...
+        });
     }
 </script>
 
