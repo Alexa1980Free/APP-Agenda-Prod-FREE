@@ -48,6 +48,7 @@
     const auth = firebase.auth();
     const database = firebase.database();
 
+    // Iniciar sesión con correo y contraseña
     function login() {
         const email = prompt("Ingrese su correo:");
         const password = prompt("Ingrese su contraseña:");
@@ -58,6 +59,19 @@
             })
             .catch(error => {
                 console.error("Error de autenticación:", error);
+            });
+    }
+
+    // Iniciar sesión con Google
+    function loginWithGoogle() {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider)
+            .then(result => {
+                console.log("Usuario autenticado con Google:", result.user);
+                cargarDatos();
+            })
+            .catch(error => {
+                console.error("Error de autenticación con Google:", error);
             });
     }
 
@@ -75,7 +89,6 @@
         const referidos = document.getElementById('referidos').value;
         const cierres = document.getElementById('cierres').value;
 
-        // Guardar en Firebase
         database.ref(`users/${userId}/kpis/`).push({
             semana: semana,
             caraACara: caraACara,
@@ -101,7 +114,6 @@
         database.ref(`users/${userId}/kpis/`).on('value', (snapshot) => {
             const data = snapshot.val();
             const table = document.getElementById('kpiTable');
-            // Limpiar la tabla
             table.innerHTML = `
                 <tr>
                     <th>Semana</th>
