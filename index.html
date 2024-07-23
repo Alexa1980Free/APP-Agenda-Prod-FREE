@@ -26,7 +26,7 @@
 <body>
 
 <h1>Seguimiento de KPIs Semanal</h1>
-<table>
+<table id="kpiTable">
     <tr>
         <th>Semana</th>
         <th>🤝 Cara a Cara</th>
@@ -36,35 +36,48 @@
         <th>🔄 Referidos</th>
         <th>✔️ Cierres</th>
     </tr>
-    <tr>
-        <td>Semana 1</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Semana 2</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Semana 3</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <!-- Agrega más filas según sea necesario -->
 </table>
+
+<h2>Agregar Datos</h2>
+<input type="number" id="semana" placeholder="Semana">
+<input type="number" id="caraACara" placeholder="Cara a Cara">
+<input type="number" id="preListings" placeholder="Pre-listings">
+<input type="number" id="preBuyings" placeholder="Pre-buyings">
+<input type="number" id="reservas" placeholder="Reservas">
+<input type="number" id="referidos" placeholder="Referidos">
+<input type="number" id="cierres" placeholder="Cierres">
+<button onclick="agregarDatos()">Agregar</button>
+
+<script>
+    function agregarDatos() {
+        const semana = document.getElementById('semana').value;
+        const caraACara = document.getElementById('caraACara').value;
+        const preListings = document.getElementById('preListings').value;
+        const preBuyings = document.getElementById('preBuyings').value;
+        const reservas = document.getElementById('reservas').value;
+        const referidos = document.getElementById('referidos').value;
+        const cierres = document.getElementById('cierres').value;
+
+        const table = document.getElementById('kpiTable');
+        const newRow = table.insertRow();
+        newRow.innerHTML = `<td>${semana}</td>
+                            <td>${caraACara}</td>
+                            <td>${preListings}</td>
+                            <td>${preBuyings}</td>
+                            <td>${reservas}</td>
+                            <td>${referidos}</td>
+                            <td>${cierres}</td>`;
+        
+        // Limpiar campos
+        document.getElementById('semana').value = '';
+        document.getElementById('caraACara').value = '';
+        document.getElementById('preListings').value = '';
+        document.getElementById('preBuyings').value = '';
+        document.getElementById('reservas').value = '';
+        document.getElementById('referidos').value = '';
+        document.getElementById('cierres').value = '';
+    }
+</script>
 
 </body>
 </html>
