@@ -14,7 +14,6 @@
 <body>
 
 <h1>Seguimiento de KPIs Semanal</h1>
-<!-- Formulario de autenticación -->
 <button onclick="login()">Iniciar Sesión</button>
 <button onclick="logout()">Cerrar Sesión</button>
 
@@ -33,7 +32,11 @@
 <h2>Agregar Datos</h2>
 <input type="number" id="semana" placeholder="Semana">
 <input type="number" id="caraACara" placeholder="Cara a Cara">
-<!-- Otros campos -->
+<input type="number" id="preListings" placeholder="Pre-listings">
+<input type="number" id="preBuyings" placeholder="Pre-buyings">
+<input type="number" id="reservas" placeholder="Reservas">
+<input type="number" id="referidos" placeholder="Referidos">
+<input type="number" id="cierres" placeholder="Cierres">
 <button onclick="agregarDatos()">Agregar</button>
 
 <script>
@@ -45,7 +48,6 @@
     const auth = firebase.auth();
     const database = firebase.database();
 
-    // Iniciar sesión
     function login() {
         const email = prompt("Ingrese su correo:");
         const password = prompt("Ingrese su contraseña:");
@@ -59,30 +61,68 @@
             });
     }
 
-    // Cerrar sesión
     function logout() {
         auth.signOut();
     }
 
-    // Agregar datos
     function agregarDatos() {
         const userId = auth.currentUser.uid;
         const semana = document.getElementById('semana').value;
         const caraACara = document.getElementById('caraACara').value;
+        const preListings = document.getElementById('preListings').value;
+        const preBuyings = document.getElementById('preBuyings').value;
+        const reservas = document.getElementById('reservas').value;
+        const referidos = document.getElementById('referidos').value;
+        const cierres = document.getElementById('cierres').value;
 
+        // Guardar en Firebase
         database.ref(`users/${userId}/kpis/`).push({
             semana: semana,
             caraACara: caraACara,
-            // Otros campos...
+            preListings: preListings,
+            preBuyings: preBuyings,
+            reservas: reservas,
+            referidos: referidos,
+            cierres: cierres
         });
+
+        // Limpiar campos
+        document.getElementById('semana').value = '';
+        document.getElementById('caraACara').value = '';
+        document.getElementById('preListings').value = '';
+        document.getElementById('preBuyings').value = '';
+        document.getElementById('reservas').value = '';
+        document.getElementById('referidos').value = '';
+        document.getElementById('cierres').value = '';
     }
 
-    // Cargar datos
     function cargarDatos() {
         const userId = auth.currentUser.uid;
         database.ref(`users/${userId}/kpis/`).on('value', (snapshot) => {
             const data = snapshot.val();
-            // Actualizar la tabla...
+            const table = document.getElementById('kpiTable');
+            // Limpiar la tabla
+            table.innerHTML = `
+                <tr>
+                    <th>Semana</th>
+                    <th>🤝 Cara a Cara</th>
+                    <th>📋 Pre-listings</th>
+                    <th>🏗️ Pre-buyings</th>
+                    <th>📅 Reservas</th>
+                    <th>🔄 Referidos</th>
+                    <th>✔️ Cierres</th>
+                </tr>
+            `;
+            for (const key in data) {
+                const row = table.insertRow();
+                row.innerHTML = `<td>${data[key].semana}</td>
+                                 <td>${data[key].caraACara}</td>
+                                 <td>${data[key].preListings}</td>
+                                 <td>${data[key].preBuyings}</td>
+                                 <td>${data[key].reservas}</td>
+                                 <td>${data[key].referidos}</td>
+                                 <td>${data[key].cierres}</td>`;
+            }
         });
     }
 </script>
