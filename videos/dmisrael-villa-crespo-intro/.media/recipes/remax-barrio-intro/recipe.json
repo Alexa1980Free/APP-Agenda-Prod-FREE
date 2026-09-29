@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "name": "remax-barrio-intro",
+  "workflow": "product-launch-video",
+  "approved_at": "2026-09-29T01:34:32.153Z",
+  "source_project": "dmisrael-villa-crespo-intro",
+  "destination": "instagram-reels",
+  "aspect": "1080x1920",
+  "language": "es-AR",
+  "style_preset": "broadside"
+}
