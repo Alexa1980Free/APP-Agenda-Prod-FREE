@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "preferences": {
+    "destination": {
+      "value": "instagram-reels",
+      "confirmed_in": [
+        "dmisrael-villa-crespo-intro"
+      ],
+      "updated_at": "2026-09-29T01:17:59.790Z"
+    },
+    "aspect": {
+      "value": "1080x1920",
+      "confirmed_in": [
+        "dmisrael-villa-crespo-intro"
+      ],
+      "updated_at": "2026-09-29T01:17:59.846Z"
+    },
+    "language": {
+      "value": "es-AR",
+      "confirmed_in": [
+        "dmisrael-villa-crespo-intro"
+      ],
+      "updated_at": "2026-09-29T01:17:59.897Z"
+    },
+    "flow": {
+      "value": "automation",
+      "confirmed_in": [
+        "dmisrael-villa-crespo-intro"
+      ],
+      "updated_at": "2026-09-29T01:17:59.945Z"
+    },
+    "storyboard": {
+      "value": "yes",
+      "confirmed_in": [
+        "dmisrael-villa-crespo-intro"
+      ],
+      "updated_at": "2026-09-29T01:17:59.994Z"
+    }
+  },
+  "sightings": {}
+}
