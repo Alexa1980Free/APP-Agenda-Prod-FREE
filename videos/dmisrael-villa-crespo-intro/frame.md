@@ -99,6 +99,13 @@ This is the **broadside** preset remixed onto the captured brand. The YAML front
 - **Colors** — use the frontmatter hex; preset color NAMES in prose (e.g. "cobalt", "cream") mean the remapped brand values.
 
 
+## Project override — RE/MAX legibility (hand edit, 2026-09-29)
+
+The remix maps ink-black → RE/MAX blue #003DA5 and fire-orange → RE/MAX red #DC1C2E. Blue ink on red
+fails contrast, so for THIS project the red ("orange") register uses **white `{colors.cream}` text**
+instead of ink (RE/MAX's own white-on-red usage). Everything else stays as specified: one register per
+frame, red is the only accent on blue, flat plane, lowercase Barlow 900 display, mono chrome uppercase.
+
 ## Overview
 
 Broadside at frame scale is a **protest-poster system where type is so large it stops reading as

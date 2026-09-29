@@ -16,7 +16,7 @@ music: confident minimal urban beat, modern real estate promo, energetic but ele
 - duration: 4s
 - poster: 3s
 - transition_in: cut
-- status: outline
+- status: built
 - src: compositions/frames/01-pregunta.html
 - type: hook
 - persuasion: Direct address (rhetorical question)
@@ -35,7 +35,7 @@ keyMessage: Este video es para vos, dueño en Villa Crespo.
 - duration: 6s
 - poster: 4.5s
 - transition_in: zoom-through
-- status: outline
+- status: built
 - src: compositions/frames/02-mapa.html
 - type: benefit_highlight
 - persuasion: Authority by local expertise
@@ -54,7 +54,7 @@ keyMessage: Especialista en Villa Crespo: captación e inversión.
 - duration: 5s
 - poster: 4s
 - transition_in: crossfade
-- status: outline
+- status: built
 - src: compositions/frames/03-cierre.html
 - type: cta
 - persuasion: Confident call to action

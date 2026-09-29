@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Villa Crespo Intro — Storyboard v1</title>
+<style>
+  @font-face { font-family: "Barlow"; font-weight: 400; src: url("fonts/barlow-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Barlow"; font-weight: 600; src: url("fonts/barlow-latin-600-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Barlow"; font-weight: 700; src: url("fonts/barlow-latin-700-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Barlow"; font-weight: 800; src: url("fonts/barlow-latin-800-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Barlow"; font-weight: 900; src: url("fonts/barlow-latin-900-normal.woff2") format("woff2"); }
+  @font-face { font-family: "IBM Plex Mono"; font-weight: 500; src: url("fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2"); }
+  @font-face { font-family: "IBM Plex Mono"; font-weight: 700; src: url("fonts/ibm-plex-mono-latin-700-normal.woff2") format("woff2"); }
+
+  :root {
+    --blue: #003DA5; --red: #DC1C2E; --white: #FFFFFF;
+    --page: #F4F2EE; --page-ink: #1A1818; --muted: #6B6566; --rule: #D9D4CC;
+    --barlow: "Barlow", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--page); color: var(--page-ink); font-family: var(--barlow); padding: 40px 32px 64px; }
+  header { max-width: 1280px; margin: 0 auto 32px; border-bottom: 1px solid var(--rule); padding-bottom: 20px; }
+  header h1 { font-weight: 900; font-size: 40px; letter-spacing: -0.03em; }
+  header h1 span { color: var(--red); }
+  header p { font-size: 17px; color: var(--muted); margin-top: 6px; }
+  .tag { display: inline-block; margin-top: 12px; font: 500 12px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid var(--page-ink); padding: 6px 10px; }
+  .actbar { max-width: 1280px; margin: 0 auto 14px; font: 500 12px var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; max-width: 420px; } }
+  figure { display: flex; flex-direction: column; gap: 10px; }
+  .cell { aspect-ratio: 9 / 16; container-type: inline-size; position: relative; overflow: hidden; }
+  .label { display: flex; justify-content: space-between; font: 500 11px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; }
+  .note { font-size: 14px; line-height: 1.45; color: #3A3536; }
+  .chip { align-self: flex-start; font: 500 10.5px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; background: var(--page-ink); color: var(--page); padding: 5px 8px; }
+
+  /* shared frame atoms (sized in cqw of the 1080-wide frame) */
+  .blue { background: var(--blue); color: var(--white); }
+  .red  { background: var(--red);  color: var(--white); }
+  .kicker { position: absolute; font: 500 3.2cqw/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; }
+  .stub { position: absolute; width: 7cqw; height: 0.6cqw; }
+  .disp { font-weight: 900; text-transform: lowercase; letter-spacing: -0.04em; line-height: 0.88; }
+
+  /* 01 — la pregunta */
+  #frame-01 .kicker { left: 7cqw; top: 9cqw; color: var(--red); }
+  #frame-01 .stub { left: 7cqw; top: 15cqw; background: var(--red); }
+  #frame-01 .q { position: absolute; left: 7cqw; right: 6cqw; top: 58cqw; }
+  #frame-01 .q div { font-size: 19cqw; }
+  #frame-01 .q .s { font-size: 15cqw; font-weight: 800; opacity: 1; }
+  #frame-01 .q .accent { color: var(--red); }
+  #frame-01 .foot { left: 7cqw; top: auto; bottom: 9cqw; color: rgba(255,255,255,0.7); }
+
+  /* 02 — el mapa */
+  #frame-02 .head { position: absolute; left: 7cqw; right: 7cqw; top: 14cqw; font-size: 12.5cqw; }
+  #frame-02 .kicker { left: 7cqw; top: 8cqw; color: var(--red); }
+  #frame-02 svg { position: absolute; left: 0; top: 50cqw; width: 100cqw; height: 118cqw; }
+  #frame-02 .foot { left: 7cqw; top: auto; bottom: 8cqw; color: rgba(255,255,255,0.7); }
+
+  /* 03 — cierre */
+  #frame-03 .kicker { left: 7cqw; top: 9cqw; color: rgba(255,255,255,0.8); }
+  #frame-03 .stub { left: 7cqw; top: 15cqw; background: var(--white); }
+  #frame-03 .line { position: absolute; left: 7cqw; right: 6cqw; top: 36cqw; font-size: 17cqw; }
+  #frame-03 .lock { position: absolute; left: 7cqw; right: 7cqw; top: 118cqw; border-top: 1px solid rgba(255,255,255,0.55); padding-top: 5cqw; }
+  #frame-03 .name { font-weight: 800; font-size: 9cqw; letter-spacing: -0.02em; line-height: 1; }
+  #frame-03 .team { font: 500 3.6cqw/1 var(--mono); letter-spacing: 0.14em; margin-top: 3cqw; }
+  #frame-03 .cta { position: absolute; left: 7cqw; right: 7cqw; bottom: 12cqw; border: 1px solid var(--white); padding: 4.5cqw 5cqw; display: flex; justify-content: space-between; align-items: baseline; }
+  #frame-03 .cta b { font-weight: 700; font-size: 6.2cqw; letter-spacing: -0.01em; }
+  #frame-03 .cta span { font: 700 4.6cqw var(--mono); }
+
+  /* closing cells */
+  .panel { background: var(--white); border: 1px solid var(--rule); padding: 22px; container-type: normal; aspect-ratio: auto; }
+  .panel h3 { font: 700 12px var(--mono); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 14px; }
+  .seams { display: flex; align-items: stretch; gap: 0; margin-bottom: 10px; }
+  .seams div { flex: var(--d); padding: 10px 8px; font: 500 11px/1.3 var(--mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--white); }
+  .seams .s1 { background: var(--blue); } .seams .s2 { background: #0B4FC2; } .seams .s3 { background: var(--red); }
+  .seamlist { font-size: 14px; line-height: 1.6; }
+  .swatches { display: flex; gap: 8px; margin-bottom: 14px; }
+  .sw { flex: 1; height: 54px; display: flex; align-items: flex-end; padding: 6px; font: 500 10px var(--mono); }
+  .panel ul { padding-left: 18px; font-size: 14px; line-height: 1.55; }
+  .typ { font-size: 14px; line-height: 1.6; margin-bottom: 12px; }
+  .typ b { font-weight: 900; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Villa Crespo Intro — Storyboard <span>v1</span></h1>
+  <p>Diego Israel · Equipo RE/MAX FREE — "Tu propiedad en Villa Crespo, en manos del especialista del barrio".</p>
+  <span class="tag">1080×1920 · 15s · 3 escenas · sin voz · música de fondo</span>
+</header>
+
+<div class="actbar">Gancho → Autoridad local → Llamado a la acción</div>
+<div class="grid">
+
+  <figure>
+    <div class="cell blue" id="frame-01">
+      <div class="kicker">Villa Crespo · CABA</div>
+      <div class="stub"></div>
+      <div class="q disp">
+        <div>¿tenés</div>
+        <div class="s">una propiedad</div>
+        <div>en <span class="accent">villa crespo?</span></div>
+      </div>
+      <div class="kicker foot">No. 01</div>
+    </div>
+    <div class="label"><span>01 · La pregunta</span><span>frame-01 · 0–4s</span></div>
+    <p class="note"><b>Primero se mueve "¿tenés"</b>, que entra en el primer cuadro. Las otras dos líneas golpean una tras otra y "villa crespo?" llega en rojo al final. Sale con un zoom hacia el mapa.</p>
+    <span class="chip">in: cut</span>
+  </figure>
+
+  <figure>
+    <div class="cell blue" id="frame-02">
+      <div class="kicker">Captación · Inversión</div>
+      <div class="head disp">conozco<br>cada cuadra.</div>
+      <svg viewBox="0 0 1080 1275" aria-label="Mapa estilizado de Villa Crespo">
+        <g stroke="rgba(255,255,255,0.18)" stroke-width="2" fill="none">
+          <path d="M0 160 L1080 40"/><path d="M0 330 L1080 210"/><path d="M0 500 L1080 380"/><path d="M0 670 L1080 550"/><path d="M0 840 L1080 720"/><path d="M0 1010 L1080 890"/><path d="M0 1180 L1080 1060"/>
+          <path d="M120 0 L260 1275"/><path d="M300 0 L440 1275"/><path d="M480 0 L620 1275"/><path d="M660 0 L800 1275"/><path d="M840 0 L980 1275"/>
+        </g>
+        <polygon points="215,300 840,215 905,820 300,960" fill="#DC1C2E" fill-opacity="0.9"/>
+        <g stroke="#FFFFFF" fill="none">
+          <path d="M0 1120 L1080 120" stroke-width="7"/>
+          <path d="M0 610 L1080 470" stroke-width="4"/>
+          <path d="M140 0 L300 1275" stroke-width="4"/>
+          <path d="M700 0 L850 1275" stroke-width="3"/>
+          <path d="M0 250 L1080 105" stroke-width="4"/>
+          <path d="M0 1030 L1080 880" stroke-width="3"/>
+        </g>
+        <g font-family="IBM Plex Mono, monospace" font-weight="500" font-size="26" letter-spacing="3" fill="#FFFFFF">
+          <text x="770" y="215" transform="rotate(-43 770 215)">AV. CORRIENTES</text>
+          <text x="40" y="585" transform="rotate(-7.5 40 585)">SCALABRINI ORTIZ</text>
+          <text x="90" y="240" transform="rotate(-7.5 90 240)">JUAN B. JUSTO</text>
+          <text x="600" y="1010" transform="rotate(-7.5 600 1010)">AV. CÓRDOBA</text>
+          <text x="165" y="860" transform="rotate(82.8 165 860)">WARNES</text>
+          <text x="748" y="330" transform="rotate(83 748 330)">DORREGO</text>
+        </g>
+        <g font-family="IBM Plex Mono, monospace" font-weight="700" font-size="30" letter-spacing="4">
+          <rect x="380" y="420" width="34" height="34" fill="#FFFFFF"/>
+          <rect x="414" y="416" width="262" height="42" fill="#FFFFFF"/>
+          <text x="430" y="447" fill="#003DA5">/ CAPTACIÓN</text>
+          <rect x="560" y="680" width="34" height="34" fill="#FFFFFF"/>
+          <rect x="594" y="676" width="262" height="42" fill="#FFFFFF"/>
+          <text x="610" y="707" fill="#003DA5">/ INVERSIÓN</text>
+        </g>
+        <text x="420" y="620" font-family="Barlow, sans-serif" font-weight="900" font-size="64" letter-spacing="-2" fill="#FFFFFF">villa crespo</text>
+      </svg>
+      <div class="kicker foot">No. 02 — mapa estilizado</div>
+    </div>
+    <div class="label"><span>02 · El mapa del barrio</span><span>frame-02 · 4–10s</span></div>
+    <p class="note"><b>Primero se mueven las calles</b>, que se dibujan desde Corrientes hacia afuera. El barrio se llena de rojo, aparece "villa crespo" y entran los pines CAPTACIÓN y después INVERSIÓN. El título "conozco cada cuadra." cae arriba. La cámara hace un paneo lento de un pin al otro.</p>
+    <span class="chip">in: zoom-through</span>
+  </figure>
+
+  <figure>
+    <div class="cell red" id="frame-03">
+      <div class="kicker">RE/MAX FREE · Villa Crespo</div>
+      <div class="stub"></div>
+      <div class="line disp">tu próxima<br>operación<br>empieza<br>acá.</div>
+      <div class="lock">
+        <div class="name">Diego Israel</div>
+        <div class="team">EQUIPO RE/MAX FREE</div>
+      </div>
+      <div class="cta"><b>escribime</b><span>→ @dmisrael.prop</span></div>
+    </div>
+    <div class="label"><span>03 · Cierre con actitud</span><span>frame-03 · 10–15s</span></div>
+    <p class="note"><b>Primero se mueve "tu próxima"</b>: la frase golpea línea por línea sobre el rojo. Después entran de abajo el nombre y el equipo, y por último la caja "escribime → @dmisrael.prop". <b>Se congela el último segundo</b> para que se pueda leer el @.</p>
+    <span class="chip">in: crossfade</span>
+  </figure>
+
+  <figure>
+    <div class="cell panel">
+      <h3>Mapa de transiciones</h3>
+      <div class="seams">
+        <div class="s1" style="--d:4">01 · 4s</div>
+        <div class="s2" style="--d:6">02 · 6s</div>
+        <div class="s3" style="--d:5">03 · 5s</div>
+      </div>
+      <div class="seamlist">
+        <b>Inicio → 01:</b> corte directo, el texto aparece en el primer cuadro.<br>
+        <b>01 → 02:</b> zoom-through. La pregunta se agranda y se va, y el mapa entra desde lejos. Pasamos de la pregunta al territorio.<br>
+        <b>02 → 03:</b> crossfade. El rojo del barrio se expande hasta llenar la pantalla.<br>
+        <b>Total:</b> 4 + 6 + 5 = <b>15s</b>.
+      </div>
+    </div>
+  </figure>
+
+  <figure>
+    <div class="cell panel">
+      <h3>Estilo · Broadside × RE/MAX</h3>
+      <div class="swatches">
+        <div class="sw" style="background:#003DA5;color:#fff">#003DA5 fondo</div>
+        <div class="sw" style="background:#DC1C2E;color:#fff">#DC1C2E acento / cierre</div>
+        <div class="sw" style="background:#fff;color:#1A1818;border:1px solid #D9D4CC">#FFFFFF texto</div>
+      </div>
+      <div class="typ"><b>Barlow 900 en minúsculas</b> para los titulares · Barlow 800 para el nombre · IBM Plex Mono en mayúsculas para etiquetas y el @.</div>
+      <ul>
+        <li>Nada de sombras, bordes redondeados ni degradados. Superficies planas y líneas finas.</li>
+        <li>Un solo color de fondo por escena. El rojo es el único acento sobre el azul.</li>
+        <li>No se inventan cifras ni estadísticas, ni se usan logos que no tenemos.</li>
+        <li>Sin fotos de stock, llaves ni skyline genérico.</li>
+        <li>Evitar el "slideshow" (tarjetas sueltas sin conexión) y el "salvapantallas" (movimiento sin sentido).</li>
+      </ul>
+    </div>
+  </figure>
+
+</div>
+</body>
+</html>
